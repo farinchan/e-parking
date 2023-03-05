@@ -58,7 +58,7 @@ class User extends BaseController
         ];
         return $this->respond($data, 200);
     }
-    public function cardDelete()
+    public function clearDelete()
     {
         $Card = new TempRfidModel();
         if ($Card->countAll() != 0) {

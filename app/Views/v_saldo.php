@@ -71,22 +71,22 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Nomor voucher</th>
-                            <th>Nominal</th>
-                            <th>Expired</th>
-                            <th>Status</th>
+                            <th>UID</th>
+                            <th>Nama</th>
+                            <th>Sisa Saldo</th>
+                            <th>Terpakai</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $no = 1 ?>
-                        <?php foreach ($voucher as $item) : ?>
+                        <?php foreach ($saldo as $item) : ?>
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= $item["voucher_nomor"] ?></td>
-                                <td><?= $item["voucher_nominal"] ?></td>
-                                <td><?= $item["voucher_status"] ?></td>
-                                <td> <?= $item["tarif_status"] == 0 ? '<span class="badge bg-label-pending me-1">Belum Digunakan</span>' : '<span class="badge bg-label-success me-1">Sudah digunakan</span>' ?> </td>
+                                <td><?= $item["rfid"] ?></td>
+                                <td><?= $item["user_nama"] ?></td>
+                                <td><?= $item["saldo_sisa"] ?></td>
+                                <td> <?= $item["saldo_terpakai"] ?> </td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="First group">
 
