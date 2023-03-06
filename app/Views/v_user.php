@@ -20,16 +20,14 @@
                                 <h5 class="modal-title" id="backDropModalTitle">Modal title</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-
                             <div class="modal-body">
-
                                 <div class="row mt-3">
                                     <div class="col mb-3">
                                         <label for="nameBackdrop" class="form-label">RFID</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Enter RFID" id="scanresult">
-                                            <button class="btn btn-outline-primary" type="button" id="scan" onclick="scan()">Scan</button>
-                                            <button class="btn btn-outline-primary" type="button">Clear</button>
+                                            <input type="text" class="form-control" placeholder="Enter RFID" id="inputrfid">
+                                            <button class="btn btn-outline-primary" type="button" id="scanAjax">Scan</button>
+                                            <button class="btn btn-outline-primary" type="button" id="clearAjax">Clear</button>
                                         </div>
                                     </div>
                                 </div>

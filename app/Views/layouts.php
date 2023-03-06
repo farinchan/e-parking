@@ -368,7 +368,6 @@
 <script>
   var timer;
 		$(document).ready(function() {
-      clearCard()
 			$('#scanAjax').click(function() {
 				getRfid()
 			});
@@ -376,9 +375,9 @@
         clearTimeout(timer);
 				clearCard()
 			});
-			// $('#usertopupid').click(function() {
-      //   funusertopup();
-			// });
+			$('#btngenerate').click(function() {
+        NoVoucher()
+			});
 		});
 
     function getRfid() {
@@ -411,6 +410,20 @@
             input.value = "";
 					}
 			});
+    }
+
+    function NoVoucher() {
+      $.ajax({
+            url: "<?php echo base_url('voucher/generate'); ?>",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+            console.log(data);
+            var input = document.getElementById("vouch");
+            input.ReadOnly = ""
+            input.value = data.string;
+            }
+        });
     }
    
 	</script>

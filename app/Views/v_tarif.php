@@ -15,9 +15,9 @@
                 <!-- FOR MODALS -->
                 <div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1" style="display: none;" aria-hidden="true">
                     <div class="modal-dialog">
-                        <form class="modal-content">
+                        <form class="modal-content" action="<?= base_url() ?>/TarifParkir/add" method="post">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="backDropModalTitle">Modal title</h5>
+                                <h5 class="modal-title" id="backDropModalTitle">Tambah Tarif Parkir</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
 
@@ -25,34 +25,31 @@
 
                                 <div class="row mt-3">
                                     <div class="col mb-3">
-                                        <label for="nameBackdrop" class="form-label">RFID</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Enter RFID" id="scanresult">
-                                            <button class="btn btn-outline-primary" type="button" id="scan" onclick="scan()">Scan</button>
-                                            <button class="btn btn-outline-primary" type="button">Clear</button>
-                                        </div>
+                                        <label for="nameBackdrop" class="form-label">Nama</label>
+                                        <input type="text" class="form-control" placeholder="Masukkkan Nama tarif" name="nama">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col mb-3">
-                                        <label for="nameBackdrop" class="form-label">Name</label>
-                                        <input type="text" id="name" class="form-control" placeholder="Enter Name">
+                                        <label for="nameBackdrop" class="form-label">Harga</label>
+                                        <input type="text" id="harga" class="form-control" placeholder="Masukkan Harga" name="harga">
                                     </div>
                                 </div>
-                                <div class="row g-2">
-                                    <div class="col mb-0">
-                                        <label for="emailBackdrop" class="form-label">Email</label>
-                                        <input type="text" id="email" class="form-control" placeholder="Enter Email">
-                                    </div>
-                                    <div class="col mb-0">
-                                        <label for="phoneBackdrop" class="form-label">No. HP</label>
-                                        <input type="text" id="phone" class="form-control" placeholder="Enter Phone Number">
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
+                                <div class="row">
                                     <div class="col mb-3">
-                                        <label for="tokenBackdrop" class="form-label">Token Telegram</label>
-                                        <input type="text" id="token" class="form-control" placeholder="Enter Token Telegram">
+                                        <label for="nameBackdrop" class="form-label">slot</label>
+                                        <input type="text" id="slot" class="form-control" placeholder="Masukkan Harga" name="slot">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="tokenBackdrop" class="form-label">Status</label>
+                                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="status">
+                                            <option value="1" selected>Aktif</option>
+                                            <option value="0">Tidak Aktif</option>
+                                        </select>
+
                                     </div>
                                 </div>
                             </div>
@@ -60,7 +57,7 @@
                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                     Close
                                 </button>
-                                <button type="button" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                         </form>
                     </div>
@@ -86,18 +83,69 @@
                                 <td><?= $item["tarif_nama"] ?></td>
                                 <td><?= $item["tarif_nilai"] ?></td>
                                 <td><?= $item["tarif_slot"] ?></td>
-                                <td> <?= $item["tarif_status"] == 0 ? '<span class="badge bg-label-pending me-1">Tidak Aktif</span>' : '<span class="badge bg-label-success me-1">Aktif</span>' ?> </td>
+                                <td> <?= $item["tarif_status"] == 0 ? '<span class="badge bg-label-warning me-1">Tidak Aktif</span>' : '<span class="badge bg-label-success me-1">Aktif</span>' ?> </td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="First group">
 
-                                        <a type="button" class="btn btn-outline-secondary">
+                                        <a type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $item['id']; ?>">
                                             <i class='tf-icons bx bxs-edit'></i>
                                         </a>
-                                        <a type="button" href="/admin/delete/<?= $item["rfid"] ?>" class="btn btn-outline-secondary">
+                                        <a type="button" href="<?= base_url() ?>/TarifParkir/delete/<?= $item["id"] ?>" class="btn btn-outline-secondary">
                                             <i class='tf-icons bx bx-trash'></i>
                                         </a>
                                     </div>
                                 </td>
+                                <div class="modal fade" id="exampleModal<?= $item['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form class="modal-content" action="<?= base_url() ?>/TarifParkir/edit/<?= $item['id']; ?>" method="post">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="backDropModalTitle">Tambah Tarif Parkir</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+
+                                                <div class="modal-body">
+
+                                                    <div class="row mt-3">
+                                                        <div class="col mb-3">
+                                                            <label for="nameBackdrop" class="form-label">Nama</label>
+                                                            <input type="text" class="form-control" placeholder="Masukkkan Nama tarif" name="nama" value="<?= $item["tarif_nama"] ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col mb-3">
+                                                            <label for="nameBackdrop" class="form-label">Harga</label>
+                                                            <input type="text" id="harga" class="form-control" placeholder="Masukkan Harga" name="harga" value="<?= $item["tarif_nilai"] ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col mb-3">
+                                                            <label for="nameBackdrop" class="form-label">slot</label>
+                                                            <input type="text" id="slot" class="form-control" placeholder="Masukkan Harga" name="slot" value="<?= $item["tarif_slot"] ?>">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col mb-3">
+                                                            <label for="tokenBackdrop" class="form-label">Status</label>
+                                                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="status">
+                                                                <option value="1" selected>Aktif</option>
+                                                                <option value="0">Tidak Aktif</option>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </tr>
                         <?php endforeach ?>
 
