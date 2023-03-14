@@ -27,7 +27,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>E-Parking</title>
+    <title>Smart Parking</title>
 
     <meta name="description" content="" />
 
@@ -81,7 +81,7 @@
               <span class="app-brand-logo demo">
                 <img src="<?= base_url() ?>/assets/img/uin.png" alt="" width="70">
                </span>
-              <span class="app-brand-text demo menu-text fw-bolder ms-2">E-Parking</span>
+              <!-- <span class="app-brand-text demo menu-text fw-bolder ms-2">Smart<br>Parking</span> -->
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -131,19 +131,19 @@
             </li>
 
             <!-- Monitoring -->
-            <li class="menu-item">
+            <li class="menu-item <?= $active == "monitoring" ? "active" : "" ?>">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
               <i class='menu-icon tf-icons bx bx-desktop'></i>
                 <div data-i18n="Layouts">Monitoring</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="/kelas" class="menu-link">
+                  <a href="/LokasiParkir" class="menu-link">
                     <div data-i18n="Without menu">Lokasi Parkir</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="/kelas" class="menu-link">
+                  <a href="/parkir" class="menu-link">
                     <div data-i18n="Without menu">Riwayat Parkir</div>
                   </a>
                 </li>
@@ -212,13 +212,14 @@
               <!-- Search -->
               <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
-                  <i class="bx bx-search fs-4 lh-0"></i>
-                  <input
+                  <!-- <i class="bx bx-search fs-4 lh-0"></i> -->
+                  <span class="fw-semibold d-block">Smart Parking UIN Sjech M.Djamil Djambek Bukittinggi</span>
+                  <!-- <input
                     type="text"
                     class="form-control border-0 shadow-none"
                     placeholder="Search..."
                     aria-label="Search..."
-                  />
+                  /> -->
                 </div>
               </div>
               <!-- /Search -->
@@ -231,7 +232,7 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="<?= base_url() ?>/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="<?= base_url() ?>/assets/img/user.png" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">

@@ -2,18 +2,24 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\API\ResponseTrait;
 use App\Controllers\BaseController;
+use App\Models\SaldoModel;
 use App\Models\VoucherModel;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
 
 helper('text');
 
 class Voucher extends BaseController
 {
-
-    protected $Voucher;
+    use ResponseTrait;
+    protected $Voucher, $saldo;
     public function __construct()
     {
         $this->Voucher = new VoucherModel();
+        $this->saldo = new SaldoModel();
     }
     public function index()
     {
@@ -59,5 +65,64 @@ class Voucher extends BaseController
     {
         $this->Voucher->delete($id);
         return redirect()->to("/voucher");
+    }
+
+    public function reedeem()
+    {
+        $key = getenv('JWT_SECRET');
+        $header = $this->request->getHeader("Authorization");
+        $token = null;
+
+        // extract the token from the header
+        if (!empty($header)) {
+            if (preg_match('/Bearer\s(\S+)/', $header, $matches)) {
+                $token = $matches[1];
+            }
+        }
+        $decoded = JWT::decode($token, new Key($key, 'HS256'));
+
+        $no = $this->request->getVar("nomor");
+        $res = $this->Voucher->where("voucher_nomor",  $no)->first();
+        if (is_null($res)) {
+            //VOUCHER TIDAK ADA
+            $data = [
+                "status" => "failed",
+                "message" => "Voucher Tidak ditemukan"
+            ];
+            return $this->respond($data, 200);
+        } else {
+            if ($res["voucher_status"] == 0) {
+                //Voucher Belum Diguanakan
+                $this->Voucher->update(
+                    $res["id"],
+                    [
+                        "voucher_status" => 1
+                    ]
+                );
+                $nominal = $res["voucher_nominal"];
+                $dataUser = $this->saldo->where("rfid", $decoded->rfid);
+                $saldoSisa = $dataUser->first()["saldo_sisa"];
+                $result = $saldoSisa + $nominal;
+
+                $this->saldo->update($decoded->rfid, ["saldo_sisa" => $result]);
+
+                $data = [
+                    "status" => "ok",
+                    "message" => "success",
+                    "saldo" => $dataUser
+                ];
+
+                return $this->respond($data, 200);
+            } else {
+                //Voucher sudah digunakan
+                $data = [
+                    "status" => "failed",
+                    "message" => "Voucher Sudah Digunakan"
+                ];
+                return $this->respond($data, 200);
+            }
+        }
+
+        return $this->respond($res, 200);
     }
 }

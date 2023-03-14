@@ -30,10 +30,21 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Dashboard::index', ['filter' => 'auth']);
-$routes->get('/', 'Dashboard::index', ['filter' => 'auth']);
+$routes->get('/admin', 'Admin::index', ['filter' => 'auth']);
+$routes->get('/isisaldo', 'IsiSaldo::index', ['filter' => 'auth']);
+$routes->get('/saldo', 'Saldo::index', ['filter' => 'auth']);
+$routes->get('/tarifparkir', 'TarifParkir::index', ['filter' => 'auth']);
 
 $routes->get('/register', 'RegisterAdmin::index');
 $routes->get('/login', 'LoginAdmin::index');
+
+//REST API FOR MOBILE
+$routes->post("login", "User::login");
+$routes->get('/profile', 'user::profile', ['filter' => 'userauth']);
+$routes->put('/profile/edit', 'user::profileEdit', ['filter' => 'userauth']);
+$routes->post('/voucher/reedeem', 'voucher::reedeem', ['filter' => 'userauth']);
+
+
 
 /*
  * --------------------------------------------------------------------

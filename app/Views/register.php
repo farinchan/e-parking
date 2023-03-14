@@ -76,13 +76,13 @@
             <div class="app-brand justify-content-center">
                 <a href="index.html" class="app-brand-link gap-2">
                   <span class="app-brand-logo demo">
-                    <img src="<?= base_url() ?>/assets/img/icons/logo1.png" alt="Logo" width="60">
+                    <img src="<?= base_url() ?>/assets/img/uin.png" alt="Logo" width="80">
                   </span>
                   <!-- <span class="app-brand-text demo text-body fw-bolder">Garis Kode</span> -->
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">Sistem Informasi Absensi Siswa dengan RFID</h4>
+              <h4 class="mb-2">E-parking UIN Bukittinggi</h4>
               <p class="mb-4">Daftar Akun Admin</p>
 
               <?php if (isset($validation)) : ?>

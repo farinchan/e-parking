@@ -5,12 +5,12 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5>User E-parking</h5>
+                <h5>Lokasi parkir</h5>
                 <!-- <a href="#" data-bs-target="#backDropModal" class="btn btn-primary mb-3">
                     <span class="tf-icons bx bx-book-add"></span>&nbsp; Tambah User
                 </a> -->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#backDropModal">
-                    <span class="tf-icons bx bx-book-add"></span>&nbsp; Tambah User
+                    <span class="tf-icons bx bx-book-add"></span>&nbsp; Tambah Lokasi
                 </button>
                 <!-- FOR MODALS -->
                 <div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1" style="display: none;" aria-hidden="true">
@@ -69,25 +69,23 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>RFID</th>
-                            <th>Nama</th>
-                            <th>Email</th>
-                            <th>No. HP</th>
-                            <th>Token</th>
+                            <th>ID Tempat</th>
+                            <th>Latitude</th>
+                            <th>Longtitude</th>
+                            <th>Active</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $no = 1 ?>
-                        <?php foreach ($user as $item) : ?>
+                        <?php foreach ($lokasiParkir as $item) : ?>
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= $item["rfid"] ?></td>
-                                <td><?= $item["user_nama"] ?></td>
-                                <td><?= $item["user_email"] ?></td>
-                                <td> <?= $item["user_phone"] ?> </td>
-                                <td> <?= $item["user_token"] ?> </td>
+                                <td><?= $item["id_tempat"] ?></td>
+                                <td><?= $item["latitude"] ?></td>
+                                <td><?= $item["longtitude"] ?></td>
+                                <td> <?= $item["active"] ?> </td>
                                 <td> <?= $item["user_status"] == 0 ? '<span class="badge bg-label-pending me-1">Tidak Aktif</span>' : '<span class="badge bg-label-success me-1">Aktif</span>' ?> </td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="First group">

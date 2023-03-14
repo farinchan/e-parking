@@ -22,6 +22,8 @@ class Filters extends BaseConfig
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'auth'          => \App\Filters\Auth::class,
+        'userauth'      => \App\Filters\UserAuth::class,
+        'cors'          => \App\Filters\CorsFilter::class, //register cors
     ];
 
     /**
